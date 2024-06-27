@@ -7,6 +7,7 @@ import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"log"
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -109,6 +110,18 @@ func GetData(r *ServiceRouter) (*ServiceRouter, error) {
 
 }
 
+func TestQuery(t *testing.T) {
+	var router = new(ServiceRouter)
+	if err := dbm.Model(ServiceRouter{}).Where(map[string]interface{}{
+		"theme_code":   "PT3202009100001",
+		"service_code": "S22440000000000w202010100001",
+		"access_uuid":  "697dd23d323141eb9509b8ec4687a71e",
+	}).First(router).Error; err != nil {
+		t.Logf("Query Err:%s\n", err.Error())
+	}
+	t.Log(router)
+}
+
 func TestCache(t *testing.T) {
 	// PT3202009100001
 	// S22440000000000w202010100001
@@ -136,4 +149,10 @@ func TestCache(t *testing.T) {
 	}
 	wg.Wait()
 	time.Sleep(100 * time.Second)
+}
+
+func TestJoin(t *testing.T) {
+	var arr = []string{"", "a", "a"}
+	str := strings.Join(arr, "--")
+	t.Log(str)
 }

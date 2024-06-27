@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package pb;
+
+option go_package = "./pb";
+
+// 路由信息  Post  /api/v1/router/info
+message SCPAlarmListRequest{
+  string theme_code = 1;
+  string service_code = 2;
+  string uuid = 3;
+}
+
+message SCPAlarmListResponse{
+  string msg = 1;
+  int32 code = 2;
+  message RouterInfo {
+    string theme_name = 1;
+    string service_name = 2;
+    string system_name = 3;
+  }
+  RouterInfo data = 3;
+}

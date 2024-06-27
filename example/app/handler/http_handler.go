@@ -62,7 +62,7 @@ func newBufferPool(size int) *bufferPool {
 
 func (h HttpHandler) proxyRouter() {
 	h.api.Any("/proxy/baidu", func(c *gin.Context) {
-		targetURL, err := url.Parse("http://127.0.0.1:8081/data")
+		targetURL, err := url.Parse("http://127.0.0.1:8081/data?abc=123")
 		if err != nil {
 			c.JSON(http.StatusBadGateway, &ts_error.BaseResponse{
 				Code: 1000,
@@ -81,9 +81,12 @@ func (h HttpHandler) proxyRouter() {
 			for key, value := range c.Request.Header {
 				req.Header[key] = value
 			}
-			log.Printf("Director:1")
+			log.Printf("Director:1--%s---%s---%s", targetURL.Path, targetURL.RawQuery, c.Request.URL.RawQuery)
 		}
 		proxy.ErrorHandler = func(writer http.ResponseWriter, request *http.Request, err error) {
+			if errors.Is(err, context.Canceled) {
+				log.Println("context.Canceled---->")
+			}
 			log.Printf("ErrorHandler:%v", err.Error())
 		}
 		proxy.ModifyResponse = func(res *http.Response) error {
