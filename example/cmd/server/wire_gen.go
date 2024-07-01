@@ -9,13 +9,14 @@ package main
 import (
 	"github.com/google/wire"
 	"github.com/lrayt/small-sparrow/example/app/handler"
+	main2 "github.com/lrayt/small-sparrow/example/cmd"
 )
 
 // Injectors from wire.go:
 
-func InitExampleServer() (*ExampleServer, func(), error) {
+func InitExampleServer() (*main2.ExampleServer, func(), error) {
 	httpHandler := handler.NewHttpHandler()
-	exampleServer := NewExampleServer(httpHandler)
+	exampleServer := main2.NewExampleServer(httpHandler)
 	return exampleServer, func() {
 	}, nil
 }

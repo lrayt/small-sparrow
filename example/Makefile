@@ -1,5 +1,5 @@
-wire:
-	@echo "start gen wire"
-	@cd "cmd" && wire
-	@git add cmd/*
-	@echo "gen wire finished"
+wire_auto_table:
+	@echo "start gen auto_table wire"
+	@cd "cmd/auto_table" && wire
+	@git add cmd/auto_table/*
+	@echo "gen auto_table wire finished"

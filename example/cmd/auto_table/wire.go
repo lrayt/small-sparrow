@@ -6,6 +6,7 @@ package main
 import (
 	"github.com/google/wire"
 	"github.com/lrayt/small-sparrow/example/app/handler"
+	main2 "github.com/lrayt/small-sparrow/example/cmd"
 )
 
 //var InternalProvider = wire.NewSet(
@@ -63,6 +64,6 @@ var HandlerProvider = wire.NewSet(
 	handler.NewHttpHandler,
 )
 
-func InitExampleServer() (*ExampleServer, func(), error) {
-	panic(wire.Build(HandlerProvider, NewExampleServer))
+func InitExampleServer() (*main2.ExampleServer, func(), error) {
+	panic(wire.Build(HandlerProvider, main2.NewExampleServer))
 }
