@@ -88,3 +88,8 @@ func Setup() {
 		}
 	}
 }
+
+// GConfigs 全局配置
+func GConfigs() common.ConfigProvider {
+	return app.ConfigProvider
+}

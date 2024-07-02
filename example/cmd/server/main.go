@@ -25,11 +25,11 @@ func main() {
 	if err := sparrow.Init("light-boot", "0.0.1", application.WithWorkerDir(rootPath)); err != nil {
 		log.Fatalf("init app err:%s\n", err.Error())
 	}
-	svc, cleanup, err := InitExampleServer()
-	defer cleanup()
-	if err != nil {
-		log.Fatalf("服务启动失败,err:%s\n", err.Error())
-	}
-	sparrow.AddHandler(svc.HttpHandler)
-	sparrow.Setup()
+	//svc, cleanup, err := InitExampleServer()
+	//defer cleanup()
+	//if err != nil {
+	//	log.Fatalf("服务启动失败,err:%s\n", err.Error())
+	//}
+	////sparrow.AddHandler(svc.HttpHandler)
+	//sparrow.Setup()
 }

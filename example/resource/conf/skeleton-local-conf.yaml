@@ -1,0 +1,12 @@
+
+database:
+  scp-db:
+    Driver: "postgres"
+    User: "system"
+    Password: "gtis"
+    Host: "192.168.2.54"
+    Port: 54321
+    DBName: "test"
+    Charset: "UTF8"
+    ShowSql: true
+    SchemaName: "public"
