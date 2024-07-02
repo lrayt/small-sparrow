@@ -1,14 +1,14 @@
 ---
 # This is the title of the article
-title: Page Config
+title: 项目介绍
 # This is the icon of the page
 icon: file
 # This control sidebar order
-order: 3
+order: 1
 # Set author
-author: Ms.Hope
+author: Jospooa
 # Set writing time
-date: 2020-01-01
+date: 2024-07-02
 # A page can have multiple categories
 category:
   - Guide

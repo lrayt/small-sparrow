@@ -8,7 +8,7 @@ bgImageDark: https://theme-hope-assets.vuejs.press/bg/6-dark.svg
 bgImageStyle:
   background-attachment: fixed
 heroText: 项目名称
-tagline: 你可以在这里放置或是整个项目的描述。
+tagline: 互联网上有着大量有优秀的开源框架，如何合理且优雅的将它们组装成一个后端工程。
 actions:
   - text: 开发指南
     icon: lightbulb
@@ -16,7 +16,7 @@ actions:
     type: primary
 
   - text: 接口文档
-    link: ./api/
+    link: ./interface/
 
 highlights:
   - header: 易于安装
@@ -27,8 +27,8 @@ highlights:
       - title: 运行 <code>pnpm create vuepress-theme-hope hope-project</code> 以创建一个新的主题项目。
       - title: 在已有项目根目录下运行 <code>pnpm create vuepress-theme-hope add .</code> 以在项目中添加主题。
 
-  - header: 在 Markdown 中添加你想要的内容
-    description: 我们扩展了标准的 CommonMark 规范，为你添加了成吨功能。
+  - header: 核心特点
+    description: 在现代快速迭代的开发环境中，一个高效、轻量且功能完备的后端开发框架显得尤为重要。为此，我们自豪地推出“小麻雀”（Little Sparrow），一款专为Golang开发者设计的轻量级后端开发脚手架。正如它的名字所寓意的那样，小麻雀虽小，却五脏俱全。
     image: /assets/image/markdown.svg
     bgImage: https://theme-hope-assets.vuejs.press/bg/2-light.svg
     bgImageDark: https://theme-hope-assets.vuejs.press/bg/2-dark.svg
@@ -36,140 +36,35 @@ highlights:
       background-repeat: repeat
       background-size: initial
     features:
-      - title: 链接检查
+      - title: 轻量级
         icon: clipboard-check
-        details: 检查 Markdown 链接
+        details: 简洁的架构设计为核心，确保开发者可以快速上手，同时保持代码的清晰和可维护性。
         link: https://theme-hope.vuejs.press/zh/guide/markdown/others.html#link-check
 
-      - title: 提示容器
+      - title: 高性能
         icon: box-archive
-        details: 用样式装饰 Markdown 内容
+        details: 借助Golang的天生优势，小麻雀能够在高并发和大数据量的场景下，提供卓越的性能表现。
         link: https://theme-hope.vuejs.press/zh/guide/markdown/stylize/hint.html
 
-      - title: GFM 警告
+      - title: 模块化设计
         icon: bell
-        details: GFM 风格的警告容器
+        details: 小麻雀采用模块化设计，开发者可以根据项目需求自由选择和扩展所需功能模块，大大提高了开发效率和灵活性。
         link: https://theme-hope.vuejs.press/zh/guide/markdown/stylize/alert.html
 
-      - title: 选项卡
+      - title: 易于集成
         icon: table-columns
-        details: 使用选项卡对相似内容进行分组
+        details: 小麻雀支持多种主流数据库、中间件和第三方服务的无缝集成，确保开发者可以轻松构建复杂的后端系统。
         link: https://theme-hope.vuejs.press/zh/guide/markdown/content/tabs.html
 
-      - title: 代码组
+      - title: 安全可靠
         icon: code
-        details: 使用选项卡对相似代码进行分组
+        details: 我们深知安全的重要性，小麻雀内置多种安全机制，包括身份验证、权限管理和数据加密等，保障您的应用安全无虞。
         link: https://theme-hope.vuejs.press/zh/guide/markdown/code/code-tabs.html
 
-      - title: 自定义对齐
+      - title: 丰富的文档和示例
         icon: align-center
-        details: Markdown 中对内容进行自定义对齐
+        details: 小麻雀提供详细的开发文档和丰富的示例代码，帮助开发者快速上手，并在项目开发过程中提供持续支持。
         link: https://theme-hope.vuejs.press/zh/guide/markdown/stylize/align.html
-
-      - title: 自定义属性
-        icon: code
-        details: 为 Markdown 元素添加属性
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/stylize/attrs.html
-
-      - title: 上下角标
-        icon: superscript
-        details: 轻松在 Markdown 中添加上下角标
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/grammar/sup-sub.html
-
-      - title: 脚注
-        icon: quote-left
-        details: 在内容中插入脚注
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/content/footnote.html
-
-      - title: 标记
-        icon: highlighter
-        details: 标记并高亮内容
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/stylize/mark.html
-
-      - title: 剧透
-        icon: eraser
-        details: 添加剧透标记支持
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/stylize/spoiler.html
-
-      - title: 任务列表
-        icon: square-check
-        details: 轻松插入任务列表
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/grammar/tasklist.html
-
-      - title: 图片语法
-        icon: image
-        details: 使用改进的语法指定图片大小与颜色模式
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/grammar/image.html
-
-      - title: 组件支持
-        icon: puzzle-piece
-        details: 在 Markdown 中轻松插入组件
-        link: https://theme-hope.vuejs.press/zh/guide/component/grammar.html
-
-      - title: 组件
-        icon: puzzle-piece
-        details: 开箱即用的常用组件
-        link: https://theme-hope.vuejs.press/zh/guide/component/built-in.html
-
-      - title: Chart.js 支持
-        icon: chart-simple
-        details: 在 Markdown 中展示 Chart.js 图表
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/chart/chartjs.html
-
-      - title: 流程图支持
-        icon: route
-        details: 在 Markdown 中直接写出流程图
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/chart/flowchart.html
-
-      - title: Mermaid 支持
-        icon: chart-pie
-        details: 在 Markdown 中添加 Mermaid 图例
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/chart/mermaid.html
-
-      - title: Plantuml 支持
-        icon: diagram-project
-        details: 在 Markdown 中添加 Plant UML 图表
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/chart/plantuml.html
-
-      - title: Tex 支持
-        icon: square-root-variable
-        details: Markdown 现在也可以支持 Tex 语法以显示公式
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/grammar/tex.html
-
-      - title: 导入文件支持
-        icon: fab fa-markdown
-        details: 将你的文档分段，并在 Markdown 中导入
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/content/include.html
-
-      - title: 交互演示支持
-        icon: code
-        details: 你可以在 Markdown 中添加交互演示
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/code/playground.html
-
-      - title: Kotlin 交互演示支持
-        icon: fab fa-kickstarter
-        details: 响应式的 Kotlin 演示
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/code/kotlin-playground.html
-
-      - title: Vue 交互演示支持
-        icon: fab fa-vuejs
-        details: 在交互演示中展示 Vue 组件
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/code/vue-playground.html
-
-      - title: Sandpack 交互演示支持
-        icon: code
-        details: Sandpack 驱动的实时的编码环境
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/code/sandpack.html
-
-      - title: 代码案例支持
-        icon: laptop-code
-        details: 你可以很方便的插入代码案例
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/code/demo.html
-
-      - title: 幻灯片支持
-        icon: person-chalkboard
-        details: 通过 Reveal.js 在 Markdown 中插入幻灯片
-        link: https://theme-hope.vuejs.press/zh/guide/markdown/content/revealjs.html
 
 copyright: false
 footer: 使用 <a href="https://theme-hope.vuejs.press/zh/" target="_blank">VuePress Theme Hope</a> 主题 | MIT 协议, 版权所有 © 2019-至今 Mr.Hope
