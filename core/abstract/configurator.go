@@ -1,4 +1,4 @@
-package common
+package abstract
 
 type ConfigProvider interface {
 	GetValue(key string) interface{}

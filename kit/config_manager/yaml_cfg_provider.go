@@ -3,7 +3,7 @@ package config_manager
 import (
 	"errors"
 	"fmt"
-	"github.com/lrayt/small-sparrow/application/runtime"
+	"github.com/lrayt/small-sparrow/core/runtime"
 	"github.com/spf13/viper"
 	"path/filepath"
 )

@@ -1,4 +1,4 @@
-package common
+package abstract
 
 // LoggerProvider 日志收集器
 type LoggerProvider interface {

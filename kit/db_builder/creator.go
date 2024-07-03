@@ -2,6 +2,7 @@ package db_builder
 
 import (
 	"fmt"
+	sparrow "github.com/lrayt/small-sparrow"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -42,6 +43,7 @@ func CreateGormDB(options *Options) (*gorm.DB, error) {
 	if dbErr != nil {
 		return nil, dbErr
 	}
+	sparrow.GRunEnv()
 	// 测试连接
 	if err := db.Ping(); err != nil {
 		return nil, err

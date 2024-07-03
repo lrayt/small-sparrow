@@ -3,6 +3,11 @@
 
 package main
 
+import (
+	"github.com/google/wire"
+	"github.com/lrayt/small-sparrow/example/app/handler"
+)
+
 //var InternalProvider = wire.NewSet(
 //	database.NewDBProvider,
 //	database.NewCacheProvider,
@@ -53,11 +58,11 @@ package main
 //	service.NewSysDictService,
 //)
 
-//// HandlerProvider 获取参数
-//var HandlerProvider = wire.NewSet(
-//	handler.NewHttpHandler,
-//)
-//
-//func InitExampleServer() (*main2.ExampleServer, func(), error) {
-//	panic(wire.Build(HandlerProvider, main2.NewExampleServer))
-//}
+// HandlerProvider 获取参数
+var HandlerProvider = wire.NewSet(
+	handler.NewHttpHandler,
+)
+
+func InitExampleServer() (*ExampleServer, func(), error) {
+	panic(wire.Build(HandlerProvider, NewExampleServer))
+}

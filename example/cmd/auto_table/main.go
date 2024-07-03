@@ -4,6 +4,7 @@ import (
 	sparrow "github.com/lrayt/small-sparrow"
 	"github.com/lrayt/small-sparrow/application"
 	"github.com/lrayt/small-sparrow/example/Internal/database"
+	"github.com/lrayt/small-sparrow/example/app/model"
 	"log"
 	"path/filepath"
 )
@@ -22,7 +23,9 @@ func NewServer(dbm *database.DBProvider) *Server {
 }
 
 func (s Server) AutoTable() {
-	log.Println("=======>")
+	if err := s.dbm.DB.AutoMigrate(model.OrderInfo{}); err != nil {
+		log.Fatalf("AutoMigrate model.OrderInfo Err:%s\n", err.Error())
+	}
 }
 
 func main() {

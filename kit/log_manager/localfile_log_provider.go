@@ -2,8 +2,8 @@ package log_manager
 
 import (
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"
-	"github.com/lrayt/small-sparrow/application/common"
-	"github.com/lrayt/small-sparrow/application/runtime"
+	"github.com/lrayt/small-sparrow/core/abstract"
+	"github.com/lrayt/small-sparrow/core/runtime"
 	"github.com/pkg/errors"
 	"github.com/rifflock/lfshook"
 	"github.com/sirupsen/logrus"
@@ -48,7 +48,7 @@ func NewLocalFileLogProvider(env *runtime.Env) (*LocalFileLogProvider, error) {
 	return &LocalFileLogProvider{logger: logger}, nil
 }
 
-func (p LocalFileLogProvider) NewLogger(commonField map[string]interface{}) common.Logger {
+func (p LocalFileLogProvider) NewLogger(commonField map[string]interface{}) abstract.Logger {
 	return &LocalFileLogLogger{Logger: p.logger, CommonFields: commonField}
 }
 
