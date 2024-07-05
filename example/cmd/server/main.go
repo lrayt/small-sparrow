@@ -8,11 +8,6 @@ import (
 	"path/filepath"
 )
 
-var (
-	AppName = "small-sparrow"
-	Version = "0.0.1"
-)
-
 type ExampleServer struct {
 	HttpHandler *handler.HttpHandler
 	dbm         *database.DBManager
@@ -24,7 +19,11 @@ func NewExampleServer(httpHandler *handler.HttpHandler, dbm *database.DBManager)
 		log.Fatalf("获取项目工作路径失败,err:%s\n", pathErr.Error())
 	}
 	rootPath = filepath.Join(rootPath, "example")
-	if err := core.InitApp(AppName, Version, core.WithHandler(httpHandler), core.WithWorkerDir(rootPath), core.WithStarter(dbm)); err != nil {
+	if err := core.InitApp(
+		core.WithHandler(httpHandler),
+		core.WithWorkerDir(rootPath),
+		core.WithStarter(dbm),
+	); err != nil {
 		return nil, err
 	}
 	return &ExampleServer{HttpHandler: httpHandler}, nil

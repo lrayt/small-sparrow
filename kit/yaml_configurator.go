@@ -1,4 +1,4 @@
-package config_manager
+package kit
 
 import (
 	"errors"

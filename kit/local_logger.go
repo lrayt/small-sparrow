@@ -1,4 +1,4 @@
-package log_manager
+package kit
 
 import (
 	rotatelogs "github.com/lestrrat-go/file-rotatelogs"

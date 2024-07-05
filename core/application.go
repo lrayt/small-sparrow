@@ -4,8 +4,7 @@ import (
 	"fmt"
 	"github.com/lrayt/small-sparrow/core/abstract"
 	"github.com/lrayt/small-sparrow/core/runtime"
-	"github.com/lrayt/small-sparrow/kit/config_manager"
-	"github.com/lrayt/small-sparrow/kit/log_manager"
+	"github.com/lrayt/small-sparrow/kit"
 	"log"
 	"os"
 	"os/signal"
@@ -27,6 +26,7 @@ func (app Application) Print() {
 	fmt.Printf("RunEnv: %s\n", app.Env.RunEnv)
 	fmt.Printf("Version: %s\n", app.Env.BuildVersion)
 	fmt.Printf("WorkDir: %s\n", app.Env.WorkDir)
+	fmt.Printf("VerifyLicense: %v\n", app.Env.VerifyLicense)
 }
 
 type Option func(app *Application)
@@ -67,10 +67,15 @@ func WithHandler(handlers ...abstract.Handler) Option {
 	}
 }
 
-var app = new(Application)
+var (
+	AppName       = "small-sparrow"
+	Version       = "0.0.1"
+	VerifyLicense = "true"
+	app           = new(Application)
+)
 
-func InitApp(appName, version string, options ...Option) error {
-	app.Env = runtime.NewEnv(appName, version)
+func InitApp(options ...Option) error {
+	app.Env = runtime.NewEnv(AppName, Version, VerifyLicense)
 	for _, option := range options {
 		option(app)
 	}
@@ -83,14 +88,17 @@ func InitApp(appName, version string, options ...Option) error {
 	// print
 	app.Print()
 	// license verify
-	if app.LicenseChecker != nil {
+	if app.Env.VerifyLicense {
+		if app.LicenseChecker == nil {
+			WithLicenseChecker(kit.NewLicenseChecker())(app)
+		}
 		if err := app.LicenseChecker.Verify(); err != nil {
 			return err
 		}
 	}
 	// default configurator
 	if app.ConfigProvider == nil {
-		if provider, err := config_manager.NewYamlConfigProvider(app.Env); err != nil {
+		if provider, err := kit.NewYamlConfigProvider(app.Env); err != nil {
 			return err
 		} else {
 			WithConfigurator(provider)(app)
@@ -98,7 +106,7 @@ func InitApp(appName, version string, options ...Option) error {
 	}
 	// default logger
 	if app.LoggerProvider == nil {
-		if provider, err := log_manager.NewLocalFileLogProvider(app.Env); err != nil {
+		if provider, err := kit.NewLocalFileLogProvider(app.Env); err != nil {
 			return err
 		} else {
 			WithLogger(provider)(app)

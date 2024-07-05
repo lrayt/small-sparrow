@@ -25,10 +25,11 @@ func NewRunEnv(env string) RunEnv {
 
 // Env 全局环境变量
 type Env struct {
-	AppName      string
-	RunEnv       RunEnv
-	WorkDir      string
-	BuildVersion string
+	AppName       string
+	RunEnv        RunEnv
+	WorkDir       string
+	BuildVersion  string
+	VerifyLicense bool
 }
 
 // SetDefaultWorkDir 设置默认地址
@@ -41,11 +42,11 @@ func (e *Env) SetDefaultWorkDir() error {
 	}
 }
 
-func NewEnv(appName, version string) *Env {
+func NewEnv(appName, version, verifyLicense string) *Env {
 	return &Env{
-		AppName:      appName,
-		RunEnv:       NewRunEnv(os.Getenv(appName)),
-		WorkDir:      "",
-		BuildVersion: version,
+		AppName:       appName,
+		RunEnv:        NewRunEnv(os.Getenv(appName)),
+		VerifyLicense: verifyLicense == "true",
+		BuildVersion:  version,
 	}
 }
