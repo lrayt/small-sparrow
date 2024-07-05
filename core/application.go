@@ -9,6 +9,7 @@ import (
 	"log"
 	"os"
 	"os/signal"
+	"reflect"
 	"syscall"
 )
 
@@ -54,7 +55,7 @@ func WithConfigurator(provider abstract.ConfigProvider) Option {
 	}
 }
 
-func WithStarter(starters []abstract.Starter) Option {
+func WithStarter(starters ...abstract.Starter) Option {
 	return func(app *Application) {
 		app.Starters = starters
 	}
@@ -95,7 +96,6 @@ func InitApp(appName, version string, options ...Option) error {
 			WithConfigurator(provider)(app)
 		}
 	}
-
 	// default logger
 	if app.LoggerProvider == nil {
 		if provider, err := log_manager.NewLocalFileLogProvider(app.Env); err != nil {
@@ -112,7 +112,13 @@ func SetupApp() {
 		errChan    = make(chan error, 1)
 		signalChan = make(chan os.Signal, 1)
 	)
-
+	for _, starter := range app.Starters {
+		if err := starter.Init(); err != nil {
+			log.Fatalf("启动失败，err:%s\n", err.Error())
+		} else {
+			log.Printf("%s初始化成功\n", reflect.TypeOf(starter).String())
+		}
+	}
 	for _, provider := range app.Handlers {
 		if provider == nil {
 			continue
@@ -129,9 +135,18 @@ func SetupApp() {
 	case err := <-errChan:
 		log.Fatalf("服务启动异常，err:%v", err)
 	case <-signalChan:
+		// shutdown handler
 		for _, handler := range app.Handlers {
 			if err := handler.Shutdown(); err != nil {
-				log.Printf("shutdown server:%s\n", err.Error())
+				log.Printf("shutdown handler:%s\n", err.Error())
+			}
+		}
+		// close starter
+		for _, starter := range app.Starters {
+			if err := starter.Close(); err != nil {
+				log.Printf("%s close err: %s\n", reflect.TypeOf(starter).String(), err.Error())
+			} else {
+				log.Printf("%s closed\n", reflect.TypeOf(starter).String())
 			}
 		}
 	}

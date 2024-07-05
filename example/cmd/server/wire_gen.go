@@ -8,6 +8,7 @@ package main
 
 import (
 	"github.com/google/wire"
+	"github.com/lrayt/small-sparrow/example/Internal/database"
 	"github.com/lrayt/small-sparrow/example/app/handler"
 )
 
@@ -15,7 +16,8 @@ import (
 
 func InitExampleServer() (*ExampleServer, func(), error) {
 	httpHandler := handler.NewHttpHandler()
-	exampleServer, err := NewExampleServer(httpHandler)
+	dbManager := database.NewDBManager()
+	exampleServer, err := NewExampleServer(httpHandler, dbManager)
 	if err != nil {
 		return nil, nil, err
 	}
@@ -24,6 +26,8 @@ func InitExampleServer() (*ExampleServer, func(), error) {
 }
 
 // wire.go:
+
+var InternalProvider = wire.NewSet(database.NewDBManager)
 
 // HandlerProvider 获取参数
 var HandlerProvider = wire.NewSet(handler.NewHttpHandler)

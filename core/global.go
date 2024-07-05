@@ -1,15 +1,23 @@
 package core
 
-import "github.com/lrayt/small-sparrow/core/abstract"
+import (
+	"github.com/lrayt/small-sparrow/core/abstract"
+	"github.com/lrayt/small-sparrow/core/runtime"
+)
 
 // GConfigs 全局配置
 func GConfigs() abstract.ConfigProvider {
 	return app.ConfigProvider
 }
 
-// GRunEnv 运行环境
-func GRunEnv() string {
-	return string(app.Env.RunEnv)
+func IsProdEnv() bool {
+	return app.Env.RunEnv == runtime.RunProdEnv
+}
+func IsTestEnv() bool {
+	return app.Env.RunEnv == runtime.RunTestEnv
+}
+func IsLocalEnv() bool {
+	return app.Env.RunEnv == runtime.RunLocalEnv
 }
 
 func GWorkDir() {

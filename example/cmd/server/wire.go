@@ -5,15 +5,14 @@ package main
 
 import (
 	"github.com/google/wire"
+	"github.com/lrayt/small-sparrow/example/Internal/database"
 	"github.com/lrayt/small-sparrow/example/app/handler"
 )
 
-//var InternalProvider = wire.NewSet(
-//	database.NewDBProvider,
-//	database.NewCacheProvider,
-//	http_manager.NewGinHttpProvider,
-//	message.NewMQProvider,
-//)
+var InternalProvider = wire.NewSet(
+	database.NewDBManager,
+)
+
 //
 //// DaoProvider 数据库操作
 //var DaoProvider = wire.NewSet(
@@ -64,5 +63,5 @@ var HandlerProvider = wire.NewSet(
 )
 
 func InitExampleServer() (*ExampleServer, func(), error) {
-	panic(wire.Build(HandlerProvider, NewExampleServer))
+	panic(wire.Build(InternalProvider, HandlerProvider, NewExampleServer))
 }

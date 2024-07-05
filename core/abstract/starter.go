@@ -1,7 +1,6 @@
 package abstract
 
 type Starter interface {
-	Init() error  // 初始化
-	Run() error   // 运行
+	Init() error
 	Close() error // 关闭
 }

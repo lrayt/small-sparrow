@@ -1,4 +1,4 @@
-package db_builder
+package builder
 
 type DBDriver string
 
@@ -7,7 +7,7 @@ const (
 	DBDriverPostgresL          = "postgres"
 )
 
-type Options struct {
+type DBOptions struct {
 	Driver      DBDriver
 	User        string
 	Password    string
@@ -21,7 +21,7 @@ type Options struct {
 	MaxLifetime int // 最大连接时长
 }
 
-func (o *Options) SetDefault() {
+func (o *DBOptions) SetDefault() {
 	if o.MaxIdleConn <= 0 {
 		o.MaxIdleConn = 10
 	}

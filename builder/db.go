@@ -1,15 +1,14 @@
-package db_builder
+package builder
 
 import (
 	"fmt"
-	sparrow "github.com/lrayt/small-sparrow"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 	"time"
 )
 
-func CreateGormDB(options *Options) (*gorm.DB, error) {
+func CreateGormDB(options *DBOptions) (*gorm.DB, error) {
 	options.SetDefault() // 设置默认值
 	var dialect gorm.Dialector
 	switch options.Driver {
@@ -42,11 +41,6 @@ func CreateGormDB(options *Options) (*gorm.DB, error) {
 	var db, dbErr = database.DB()
 	if dbErr != nil {
 		return nil, dbErr
-	}
-	sparrow.GRunEnv()
-	// 测试连接
-	if err := db.Ping(); err != nil {
-		return nil, err
 	}
 	db.SetMaxIdleConns(options.MaxIdleConn)                                 // 设置空闲连接池中连接的最大数量
 	db.SetMaxOpenConns(options.MaxOpenConn)                                 // 设置打开数据库连接的最大数量。

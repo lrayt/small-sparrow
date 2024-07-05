@@ -1,23 +1,53 @@
 package database
 
 import (
-	sparrow "github.com/lrayt/small-sparrow"
-	"github.com/lrayt/small-sparrow/kit/db_builder"
+	"context"
+	"database/sql"
+	"github.com/lrayt/small-sparrow/builder"
+	"github.com/lrayt/small-sparrow/core"
 	"gorm.io/gorm"
+	"time"
 )
 
-type DBProvider struct {
-	DB *gorm.DB
+type DBManager struct {
+	GormDB *gorm.DB
 }
 
-func NewDBProvider() (*DBProvider, error) {
-	options := new(db_builder.Options)
-	if err := sparrow.GConfigs().PackConf("database.scp-db", options); err != nil {
-		return nil, err
+func (p *DBManager) Init() error {
+	var (
+		err     error
+		options = new(builder.DBOptions)
+	)
+	// cfg
+	err = core.GConfigs().PackConf("database.scp-db", options)
+	if err != nil {
+		return err
 	}
-	if db, err := db_builder.CreateGormDB(options); err != nil {
-		return nil, err
-	} else {
-		return &DBProvider{DB: db}, nil
+	// gorm db
+	p.GormDB, err = builder.CreateGormDB(options)
+	if err != nil {
+		return err
 	}
+	// sql db
+	var sqlDB *sql.DB
+	sqlDB, err = p.GormDB.DB()
+	if err != nil {
+		return err
+	}
+	// ping
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*3)
+	defer cancel()
+	return sqlDB.PingContext(ctx)
+}
+
+func (p DBManager) Close() error {
+	db, err := p.GormDB.DB()
+	if err != nil {
+		return err
+	}
+	return db.Close()
+}
+
+func NewDBManager() *DBManager {
+	return new(DBManager)
 }
